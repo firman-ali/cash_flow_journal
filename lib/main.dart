@@ -1,5 +1,5 @@
+import 'package:cash_flow_journal/constant/colors.dart';
 import 'package:cash_flow_journal/ui/home_page.dart';
-import 'package:cash_flow_journal/ui/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,8 +15,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: backgroundColor,
       ),
-      home: const HomePage(),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => const HomePage(),
+      },
     );
   }
 }
