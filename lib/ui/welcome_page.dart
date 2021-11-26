@@ -20,7 +20,6 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void dispose() {
     _nameTextController.dispose();
-    _emailTextController.dispose();
     super.dispose();
   }
 
@@ -73,11 +72,6 @@ class _WelcomePageState extends State<WelcomePage> {
                             hint: 'Sugi',
                             action: TextInputAction.next,
                           ),
-                          BioTextField(
-                            controller: _emailTextController,
-                            hint: 'youremail@email.com',
-                            label: 'Email',
-                          ),
                           SizedBox(
                             width: size.width,
                             child: ElevatedButton(
@@ -87,8 +81,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                       _emailTextController.text.isNotEmpty) {
                                     Provider.of<PreferencesProvider>(context,
                                             listen: false)
-                                        .registerData(_nameTextController.text,
-                                            _emailTextController.text);
+                                        .registerData(_nameTextController.text);
                                     Navigator.pushReplacementNamed(
                                         context, HomePage.routeName);
                                   } else {

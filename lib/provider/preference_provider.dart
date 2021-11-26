@@ -9,9 +9,11 @@ class PreferencesProvider extends ChangeNotifier {
     _getStatus();
   }
 
+  late String _resultData;
   late ResultState _resultState;
   late bool _isRegistered;
 
+  String get result => _resultData;
   ResultState get state => _resultState;
   bool get isRegitered => _isRegistered;
 
@@ -21,6 +23,7 @@ class PreferencesProvider extends ChangeNotifier {
     final result = await preferencesHelper.isRegistered;
     if (result) {
       _isRegistered = result;
+      _getRegisteredData();
       _resultState = ResultState.hasData;
       notifyListeners();
     } else {
@@ -29,8 +32,17 @@ class PreferencesProvider extends ChangeNotifier {
     }
   }
 
-  void registerData(String name, String email) {
-    preferencesHelper.registerData(name, email);
+  void registerData(String name) {
+    preferencesHelper.registerData(name);
     _getStatus();
+  }
+
+  void _getRegisteredData() async {
+    _resultState = ResultState.isLoading;
+    notifyListeners();
+    final result = await preferencesHelper.getRegisteredData;
+    _resultData = result;
+    _resultState = ResultState.hasData;
+    notifyListeners();
   }
 }

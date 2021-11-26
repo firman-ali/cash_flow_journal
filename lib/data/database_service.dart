@@ -27,8 +27,12 @@ class DatabaseService {
       onCreate: (db, version) async {
         await db.execute(
           '''CREATE TABLE $_tableCashFlow (
-               id TEXT PRIMARY KEY,
-               cashFlowType TEXT, categoryType TEXT, amount REAL, description TEXT
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               cashFlowType TEXT, 
+               categoryType TEXT,
+               amount REAL, 
+               description TEXT,
+               date INTEGER
              )''',
         );
       },
